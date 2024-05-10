@@ -1,0 +1,20 @@
+.home_row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  z-index: 1;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.page_slide {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.arrow_icon{
+  width: 40px;
+  height: 40px;
+}
+.arrow_icon:hover {
+  color: rgb(206, 145, 33);
+}

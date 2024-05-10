@@ -1,0 +1,18 @@
+.person_card {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  margin: 10px;
+  padding: 10px;
+  background-color: rgb(47, 43, 43);
+  color: white;
+  border-radius: 5px;
+}
+.person_image {
+  width: 100%;
+  height: 300px;
+  margin-bottom: 10px;
+}
+.person_popularity {
+  margin-bottom: 5px;
+}
