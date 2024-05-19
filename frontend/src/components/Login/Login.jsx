@@ -1,6 +1,7 @@
 import React from "react";
 import "./Login.css";
 import { Link, Navigate } from "react-router-dom";
+import axios from "axios";
 import logo from "./logo.png";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,13 +20,25 @@ function Login() {
     }
   };
   const dispatch = useDispatch();
-  function handleAuthentication(event) {
-    event.preventDefault();
-    dispatch(login(email));
-  }
   const status = useSelector((state) => {
     return state.auth.status;
   });
+  async function handleSubmit(event) {
+    event.preventDefault();
+    await axios
+      .post("http://localhost:5000/api/user/login", {
+        email,
+        password,
+      })
+      .then((response) => {
+        dispatch(login(email));
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.log(error.message);
+      });
+  }
+
   return (
     <>
       {status === true && <Navigate to="/" replace={true} />}
@@ -35,7 +48,7 @@ function Login() {
             <img className="login_logo" src={logo} alt="logo" />{" "}
           </Link>
           <h1>Login</h1>
-          <form className="login_form" >
+          <form onSubmit={(e) => handleSubmit(e)} className="login_form">
             <label className="login_label">Enter email</label>
             <input
               onChange={handleChange}
@@ -54,7 +67,7 @@ function Login() {
               type="password"
               className="login_input"
             />
-            <button onClick={handleAuthentication} className="login_button">
+            <button type="submit" className="login_button">
               Login
             </button>
           </form>
