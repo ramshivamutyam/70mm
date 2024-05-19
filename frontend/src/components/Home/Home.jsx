@@ -8,6 +8,12 @@ function Home() {
   function pageHandler(num) {
     setPage(num);
   }
+  async function demo(){
+    await fetch("/post")
+    .then((res) => console.log(res))
+    .catch((err) => console.error("error:" + err));
+  }
+  demo();
   const url =
     "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=";
   return (

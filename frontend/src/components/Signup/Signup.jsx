@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import "./Signup.css";
 import logo from "./logo.png";
 import { useState } from "react";
@@ -22,6 +23,23 @@ function Signup() {
       setRePassword(value);
     }
   }
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    await axios
+      .post("http://localhost:5000/api/user/register", {
+        username: name,
+        email,
+        password,
+      })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.log(error.message);
+      });
+  }
+
   return (
     <div className="signup">
       <div className="signup_container">
@@ -29,7 +47,7 @@ function Signup() {
           <img className="signup_logo" src={logo} alt="logo" />
         </Link>
         <h1>Create account</h1>
-        <form action="" className="signup_form">
+        <form onSubmit={(e) => handleSubmit(e)} className="signup_form">
           <label className="signup_label">Your name</label>
           <input
             name="name"
@@ -66,7 +84,9 @@ function Signup() {
             type="password"
             className="signup_input"
           />
-          <button className="signup_button">create</button>
+          <button typeof="submit" className="signup_button">
+            create
+          </button>
         </form>
         <hr className="horizontal_line" />
         <Link to="/login">
